@@ -11,9 +11,30 @@ signal=audioread("song1.mp3");
 gain=ones(10,1);
 typeOfFilter='filter';
 tic
-signalOut=FilteringBanks(signal,bBank,typeOfFilter,gain);
+signalOuY=FilteringBanks(signal,bBank,typeOfFilter,gain);
 toc
 type= 'fftfilter';
  tic
 signalOuT=FilteringBanks(signal,bBank,type,gain); 
 toc
+
+type= 'convFilter';
+tic
+signalOuT=FilteringBanks(signal,bBank,type,gain);
+toc
+%% Stream sound
+  deviceWriter = audioDeviceWriter('SampleRate', fS);
+fileReader = dsp.AudioFileReader('song.mp3');
+ while isDone(fileReader)
+     audioData = fileReader();
+
+
+
+
+
+
+%%
+
+
+
+    
