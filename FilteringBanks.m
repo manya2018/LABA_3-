@@ -1,7 +1,7 @@
-function  signalOut=FilteringBanks(signal,bBank,typeOfFilter,gain)
+function  [signalOut, initB]=FilteringBanks(signal,bBank,typeOfFilter,gain,initB)
 A=gain.*bBank;
 B=sum(A, 1);
-    
+ 
 switch typeOfFilter
    case 'filter'
        signalOut = filter(B, 1, signal);
@@ -10,6 +10,7 @@ switch typeOfFilter
     case 'convFilter'
         signalOut = convFilter(B, signal);
 end
+[signalOut, initB] = filter(b, 1, signal, initB); 
 end
 
 function signalOut=convFilter(B,signal)
